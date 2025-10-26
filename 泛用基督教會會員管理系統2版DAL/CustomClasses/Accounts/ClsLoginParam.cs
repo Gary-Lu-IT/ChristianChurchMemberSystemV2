@@ -1,4 +1,4 @@
-﻿namespace 泛用基督教會會員管理系統2版DAL.Accounts
+﻿namespace 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts
 {
     /// <summary>登入系統用封包</summary>
     public class ClsLoginParam

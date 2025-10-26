@@ -1,4 +1,4 @@
-﻿using 泛用基督教會會員管理系統2版DAL.Accounts;
+﻿using 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts;
 using 泛用基督教會會員管理系統2版通用API.SQLiteModels.Church;
 
 namespace 泛用基督教會會員管理系統2版通用API.DataWriters
