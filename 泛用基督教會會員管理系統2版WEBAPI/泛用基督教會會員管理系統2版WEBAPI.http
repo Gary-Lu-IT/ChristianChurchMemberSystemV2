@@ -1,0 +1,6 @@
+@泛用基督教會會員管理系統2版WEBAPI_HostAddress = http://localhost:5029
+
+GET {{泛用基督教會會員管理系統2版WEBAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
