@@ -11,6 +11,8 @@
     /// <summary>登入系統傳回結果</summary>
     public class ClsLoginResult
     {
+        /// <summary>帳號</summary>
+        public string UserID { get; set; } = string.Empty;
         /// <summary>登入是否成功</summary>
         public bool IsSuccess { get; set; } = false;
         /// <summary>錯誤訊息</summary>

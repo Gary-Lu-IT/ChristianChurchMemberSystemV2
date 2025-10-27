@@ -8,8 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0-rc.2.25502.107" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.6" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\泛用基督教會會員管理系統2版DAL\泛用基督教會會員管理系統2版DAL.csproj" />
+    <ProjectReference Include="..\泛用基督教會會員管理系統2版\泛用基督教會會員管理系統2版通用API.csproj" />
   </ItemGroup>
 
 </Project>

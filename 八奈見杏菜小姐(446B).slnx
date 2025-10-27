@@ -1,5 +1,5 @@
 <Solution>
   <Project Path="泛用基督教會會員管理系統2版/泛用基督教會會員管理系統2版通用API.csproj" />
   <Project Path="泛用基督教會會員管理系統2版DAL/泛用基督教會會員管理系統2版DAL.csproj" />
-  <Project Path="泛用基督教會會員管理系統2版WEBAPI/泛用基督教會會員管理系統2版WEBAPI.csproj" Id="b9266cbf-18db-445c-929b-3c088e6e4d2c" />
+  <Project Path="泛用基督教會會員管理系統2版視窗EXE/泛用基督教會會員管理系統2版視窗EXE.csproj" Id="550e5196-998b-476e-864c-7ecb74682cd5" />
 </Solution>

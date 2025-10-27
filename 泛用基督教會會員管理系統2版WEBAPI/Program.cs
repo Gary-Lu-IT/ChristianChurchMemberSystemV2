@@ -15,6 +15,17 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(options =>
 {
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Version = "v1",
+        Title = "泛用基督教會會員管理系統2版WEBAPI",
+        Description = "泛用基督教會會員管理系統2版WEBAPI",
+        TermsOfService = new Uri("https://example.com/terms"),
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        {
+            Name = "Christian Church"
+        }
+    });
     // 取得 XML 文件路徑
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);

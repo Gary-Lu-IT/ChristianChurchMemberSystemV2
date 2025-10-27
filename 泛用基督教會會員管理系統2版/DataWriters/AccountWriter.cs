@@ -4,7 +4,7 @@ using 泛用基督教會會員管理系統2版通用API.SQLiteModels.Church;
 namespace 泛用基督教會會員管理系統2版通用API.DataWriters
 {
     /// <summary>帳號相關資料寫入器</summary>
-    public class AccountWriter
+    internal class AccountWriter
     {
         /// <summary>登入作業</summary>
         /// <param name="Param"></param>
@@ -38,9 +38,11 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
                 db.SaveChanges();
                 return new ClsLoginResult
                 {
+                    UserID = Param.UserID,
                     IsSuccess = true,
                     UserName = "系統管理員",
-                    UserRole = "SystemAdmin"
+                    UserRole = "SystemAdmin",
+                    ErrorMessage = string.Empty
                 };
             }
             else
