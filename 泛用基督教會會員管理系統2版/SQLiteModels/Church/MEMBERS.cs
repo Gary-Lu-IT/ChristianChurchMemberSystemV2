@@ -9,7 +9,9 @@ public partial class MEMBERS
 
     public string USERNAME { get; set; } = null!;
 
-    public double? GENDER { get; set; }
+    public string? ROLE { get; set; }
+
+    public int? GENDER { get; set; }
 
     public string? BIRTHDATE { get; set; }
 
