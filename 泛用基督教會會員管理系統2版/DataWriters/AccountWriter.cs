@@ -1,4 +1,8 @@
-﻿using 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts;
+﻿using System.Net;
+using System.Numerics;
+using System.Reflection;
+using 泛用基督教會會員管理系統2版DAL.CustomClasses;
+using 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts;
 using 泛用基督教會會員管理系統2版通用API.SQLiteModels.Church;
 
 namespace 泛用基督教會會員管理系統2版通用API.DataWriters
@@ -72,6 +76,31 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
                 MODIFIEDDATE = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             });
             db.SaveChanges();
+        }
+        /// <summary>修改會員資料</summary>
+        /// <param name="Param"></param>
+        /// <exception cref="ChurchMemberException"></exception>
+        public static void UpdateMember(ClsModifyMemberParam Param)
+        {
+            ChurchMembersNewContext db = new();
+            MEMBERS? M = db.MEMBERS.Where(x => x.LOGINID == Param.MemberID).FirstOrDefault();
+            if (M != null)
+            {
+                M.USERNAME = Param.Name;
+                M.BIRTHDATE = Param.Birthdate?.ToString("yyyy-MM-dd");
+                M.GENDER = Param.GenderIsMale ? 1 : 0;
+                M.PHONE = Param.PhoneNumber;
+                M.EMAIL = Param.Email;
+                M.ADDRESS = Param.HomeAddress;
+                M.BAPTISED = Param.IsBaptised ? 1 : 0;
+                M.MODIFIER = Param.ModifiedBy;
+                M.MODIFIEDDATE = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new ChurchMemberException(SystemReturnMessage.MemberIDNotExist, $"找不到會員資料，無法進行修改作業，會員代號：{Param.MemberID}");
+            }
         }
         #region 副程式
         /// <summary>流水號轉成16進位數，每四位數中間隔著一個減號，如1234-5678-9ABC-DEF0這樣</summary>

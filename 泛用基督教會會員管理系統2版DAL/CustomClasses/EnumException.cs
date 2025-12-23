@@ -27,30 +27,12 @@ namespace 泛用基督教會會員管理系統2版DAL.CustomClasses
         /// <summary>帳號與密碼不可空白</summary>
         [DataType("帳號與密碼不可空白")]
         EmptyIDOrPassword = 102,
+        /// <summary>必填資料未填寫</summary>
+        [DataType("必填資料未填寫")]
+        RequiredDataIsEmpty = 100,
         /// <summary>教友ID不存在</summary>
         [DataType("教友ID不存在")]
         MemberIDNotExist = 121,
-        /// <summary>教友資料已停用</summary>
-        [DataType("教友資料已停用")]
-        MemberDataStopped = 122,
-        /// <summary>家庭編號不存在</summary>
-        [DataType("家庭編號不存在")]
-        FamilyIDNotExist = 141,
-        /// <summary>家庭內有教友存在，不可刪除</summary>
-        [DataType("家庭內有教友存在，不可刪除")]
-        FamilyHasMembers = 142,
-        /// <summary>公告ID不存在</summary>
-        [DataType("公告ID不存在")]
-        AnnouncementIDNotExist = 161,
-        /// <summary>活動設定ID不存在</summary>
-        [DataType("活動設定ID不存在")]
-        EventSettingIDNotExist = 181,
-        /// <summary>活動頻率不正確</summary>
-        [DataType("活動頻率不正確")]
-        FrequencyNotValid = 182,
-        /// <summary>活動時間格式不正確，請使用 HH:mm 格式。</summary>
-        [DataType("活動時間格式不正確，請使用 HH:mm 格式。")]
-        InvalidTimeFormat = 183,
         /// <summary>系統不明錯誤</summary>
         [DataType("系統不明錯誤")]
         SystemError = 10001
@@ -87,6 +69,12 @@ namespace 泛用基督教會會員管理系統2版DAL.CustomClasses
         /// <summary>建構函式</summary>
         public ChurchMemberException(SystemReturnMessage errorCode)
             : base(errorCode.GetDescription())  // 使用擴充方法取得訊息
+        {
+            ErrorCode = errorCode;
+        }
+        /// <summary>建構函式</summary>
+        public ChurchMemberException(SystemReturnMessage errorCode,string Message)
+            : base(Message)  // 使用擴充方法取得訊息
         {
             ErrorCode = errorCode;
         }

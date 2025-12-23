@@ -49,6 +49,7 @@ namespace 泛用基督教會會員管理系統2版視窗EXE
         {
             TsmiLogin.Visible = CurrentLogin == null;
             TsmiLogout.Visible = CurrentLogin != null;
+            TsmiMemberManager.Visible = CurrentLogin != null;
         }
         #endregion
     }
