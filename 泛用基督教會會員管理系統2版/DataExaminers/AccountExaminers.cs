@@ -30,6 +30,7 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
             {
                 throw new ChurchMemberException(SystemReturnMessage.RequiredDataIsEmpty, "必填資料未填寫：帳號");
             }
+            AccountWriter.AddMember(Param);
         }
         /// <summary>修改會員資料</summary>
         /// <param name="Param"></param>
@@ -40,6 +41,7 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
             {
                 throw new ChurchMemberException(SystemReturnMessage.RequiredDataIsEmpty, "必填資料未填寫：帳號");
             }
+            AccountWriter.UpdateMember(Param);
         }
     }
 }

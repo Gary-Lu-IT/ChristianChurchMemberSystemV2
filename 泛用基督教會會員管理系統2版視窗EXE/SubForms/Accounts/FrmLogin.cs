@@ -42,6 +42,12 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
         {
             try
             {
+                if(string.IsNullOrWhiteSpace(TxtLoginID.Text)||string.IsNullOrWhiteSpace(TxtPassword.Text))
+                {
+                    MessageBox.Show("請輸入登入帳號與密碼！", "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TxtLoginID.Focus();
+                    return;
+                }
                 LoginResult=AccountExaminers.Login(new ClsLoginParam
                 {
                     UserID=TxtLoginID.Text,
