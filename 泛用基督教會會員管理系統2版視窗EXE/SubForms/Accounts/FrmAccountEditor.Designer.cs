@@ -67,6 +67,7 @@
             BtnConfirm.TabIndex = 6;
             BtnConfirm.Text = "確認";
             BtnConfirm.UseVisualStyleBackColor = true;
+            BtnConfirm.Click += BtnConfirm_Click;
             // 
             // label1
             // 
@@ -112,6 +113,7 @@
             // RdoMan
             // 
             RdoMan.AutoSize = true;
+            RdoMan.Checked = true;
             RdoMan.Location = new Point(163, 63);
             RdoMan.Name = "RdoMan";
             RdoMan.Size = new Size(53, 29);
@@ -127,7 +129,6 @@
             RdoWoman.Name = "RdoWoman";
             RdoWoman.Size = new Size(53, 29);
             RdoWoman.TabIndex = 16;
-            RdoWoman.TabStop = true;
             RdoWoman.Text = "女";
             RdoWoman.UseVisualStyleBackColor = true;
             // 
@@ -165,10 +166,10 @@
             // 
             // TxtEMail
             // 
-            this.TxtEMail.Location = new Point(268, 141);
-            this.TxtEMail.Name = "TxtEMail";
-            this.TxtEMail.Size = new Size(566, 33);
-            this.TxtEMail.TabIndex = 21;
+            TxtEMail.Location = new Point(268, 141);
+            TxtEMail.Name = "TxtEMail";
+            TxtEMail.Size = new Size(566, 33);
+            TxtEMail.TabIndex = 21;
             // 
             // label6
             // 
@@ -214,7 +215,7 @@
             Controls.Add(label7);
             Controls.Add(TxtHomeAddress);
             Controls.Add(label6);
-            Controls.Add(this.TxtEMail);
+            Controls.Add(TxtEMail);
             Controls.Add(TxtPhone);
             Controls.Add(label5);
             Controls.Add(DtpBirthday);
