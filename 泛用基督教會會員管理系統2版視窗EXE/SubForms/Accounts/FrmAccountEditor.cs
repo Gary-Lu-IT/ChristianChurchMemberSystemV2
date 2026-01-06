@@ -48,7 +48,7 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
             if(!TxtLoginID.Enabled)
             {
                 //編輯模式
-                AccountExaminers.UpdateMember(new ClsModifyMemberParam
+                AccountExaminer.UpdateMember(new ClsModifyMemberParam
                 {
                     MemberID = TxtLoginID.Text.Trim(),
                     Name = TxtName.Text.Trim(),
@@ -72,7 +72,7 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
                     MessageBox.Show("帳號與姓名必須填寫", "無法新增", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-                AccountExaminers.AddMember(new ClsCreateMemberParam
+                AccountExaminer.AddMember(new ClsCreateMemberParam
                 {
                     MemberID = TxtLoginID.Text.Trim(),
                     Name = TxtName.Text.Trim(),
@@ -84,7 +84,7 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
                     IsBaptised = RdoMan.Checked,
                     CreatedDate = DtpBirthday.Value,
                     CreatedBy = DataEditor
-                };);
+                });
                 MessageBox.Show("新增成功。", "新增成員資料", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
             }

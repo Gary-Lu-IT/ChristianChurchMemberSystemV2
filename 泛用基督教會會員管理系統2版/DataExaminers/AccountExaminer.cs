@@ -5,7 +5,7 @@ using 泛用基督教會會員管理系統2版通用API.DataWriters;
 namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
 {
     /// <summary>帳號相關資料檢核區</summary>
-    public class AccountExaminers
+    public class AccountExaminer
     {
         /// <summary>登入作業</summary>
         /// <param name="Param"></param>
@@ -30,6 +30,10 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
             {
                 throw new ChurchMemberException(SystemReturnMessage.RequiredDataIsEmpty, "必填資料未填寫：帳號");
             }
+            if(AccountWriter.GetMember(Param.MemberID) != null)
+            {
+                throw new ChurchMemberException(SystemReturnMessage.MemberIDAlreadyExist, "帳號已存在，請更換其他帳號。");
+            }
             AccountWriter.AddMember(Param);
         }
         /// <summary>修改會員資料</summary>
@@ -42,6 +46,12 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
                 throw new ChurchMemberException(SystemReturnMessage.RequiredDataIsEmpty, "必填資料未填寫：帳號");
             }
             AccountWriter.UpdateMember(Param);
+        }
+        /// <summary>取得所有會員資料</summary>
+        /// <returns></returns>
+        public static List<ClsModifyMemberParam> LoadMember()
+        {
+            return AccountWriter.LoadMember();
         }
     }
 }

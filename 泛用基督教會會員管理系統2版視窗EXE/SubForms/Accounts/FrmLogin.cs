@@ -48,7 +48,7 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
                     TxtLoginID.Focus();
                     return;
                 }
-                LoginResult=AccountExaminers.Login(new ClsLoginParam
+                LoginResult=AccountExaminer.Login(new ClsLoginParam
                 {
                     UserID=TxtLoginID.Text,
                     Password=TxtPassword.Text

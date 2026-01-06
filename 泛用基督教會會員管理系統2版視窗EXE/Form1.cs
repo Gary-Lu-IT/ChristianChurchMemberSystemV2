@@ -20,7 +20,8 @@ namespace 泛用基督教會會員管理系統2版視窗EXE
         private void ClickTsmiLogin(object sender, EventArgs e)
         {
             FrmLogin FL = new FrmLogin();
-            if (FL.ShowDialog(this) == DialogResult.OK) {
+            if (FL.ShowDialog(this) == DialogResult.OK)
+            {
                 CurrentLogin = FL.LoginResult;
                 SwitchLoginOutState();
                 MessageBox.Show($"歡迎，{CurrentLogin.UserName}！", "登入成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -50,6 +51,28 @@ namespace 泛用基督教會會員管理系統2版視窗EXE
             TsmiLogin.Visible = CurrentLogin == null;
             TsmiLogout.Visible = CurrentLogin != null;
             TsmiMemberManager.Visible = CurrentLogin != null;
+        }
+        #endregion
+
+        #region 主資料管理
+        /// <summary>開啟會員資料視窗</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TsmiMemberManager_Click(object sender, EventArgs e)
+        {
+            foreach(Form f in MdiChildren)
+            {
+                if(f is FrmAccountView)
+                {
+                    f.Activate();
+                    return;
+                }
+            }
+            FrmAccountView FAV = new FrmAccountView
+            {
+                MdiParent = this
+            };
+            FAV.Show();
         }
         #endregion
     }

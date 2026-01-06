@@ -19,23 +19,19 @@ namespace 泛用基督教會會員管理系統2版DAL.CustomClasses
     public enum SystemReturnMessage
     {
         /// <summary>成功</summary>
-        [DataType("成功")]
-        Success = 1,
+        [DataType("成功")] Success = 1,
         /// <summary>帳號與密碼有錯誤</summary>
-        [DataType("帳號與密碼有錯誤")]
-        WrongIDOrPassword = 101,
+        [DataType("帳號與密碼有錯誤")] WrongIDOrPassword = 101,
         /// <summary>帳號與密碼不可空白</summary>
-        [DataType("帳號與密碼不可空白")]
-        EmptyIDOrPassword = 102,
+        [DataType("帳號與密碼不可空白")] EmptyIDOrPassword = 102,
         /// <summary>必填資料未填寫</summary>
-        [DataType("必填資料未填寫")]
-        RequiredDataIsEmpty = 100,
+        [DataType("必填資料未填寫")] RequiredDataIsEmpty = 100,
         /// <summary>教友ID不存在</summary>
-        [DataType("教友ID不存在")]
-        MemberIDNotExist = 121,
+        [DataType("教友ID不存在")] MemberIDNotExist = 121,
+        /// <summary>帳號已存在</summary>
+        [DataType("帳號已存在")] MemberIDAlreadyExist = 122,
         /// <summary>系統不明錯誤</summary>
-        [DataType("系統不明錯誤")]
-        SystemError = 10001
+        [DataType("系統不明錯誤")] SystemError = 10001
     }
 
     /// <summary>Enum 擴充方法：取得 DataType 屬性的描述文字</summary>

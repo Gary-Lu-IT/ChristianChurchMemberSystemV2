@@ -42,21 +42,21 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { TsmiLogin, TsmiLogout, TsmDataManagement });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 27);
+            menuStrip1.Size = new Size(800, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
             // TsmiLogin
             // 
             TsmiLogin.Name = "TsmiLogin";
-            TsmiLogin.Size = new Size(67, 23);
+            TsmiLogin.Size = new Size(67, 24);
             TsmiLogin.Text = "登入(&I)";
             TsmiLogin.Click += ClickTsmiLogin;
             // 
             // TsmiLogout
             // 
             TsmiLogout.Name = "TsmiLogout";
-            TsmiLogout.Size = new Size(75, 23);
+            TsmiLogout.Size = new Size(75, 24);
             TsmiLogout.Text = "登出(&O)";
             TsmiLogout.Click += ClickTsmiLogout;
             // 
@@ -64,7 +64,7 @@
             // 
             TsmDataManagement.DropDownItems.AddRange(new ToolStripItem[] { TsmiMemberManager });
             TsmDataManagement.Name = "TsmDataManagement";
-            TsmDataManagement.Size = new Size(122, 23);
+            TsmDataManagement.Size = new Size(122, 24);
             TsmDataManagement.Text = "主資料管理(&M)";
             // 
             // TsmiMemberManager
@@ -72,6 +72,7 @@
             TsmiMemberManager.Name = "TsmiMemberManager";
             TsmiMemberManager.Size = new Size(224, 26);
             TsmiMemberManager.Text = "會員資料管理(&A)";
+            TsmiMemberManager.Click += TsmiMemberManager_Click;
             // 
             // Form1
             // 

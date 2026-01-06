@@ -102,11 +102,49 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
                 throw new ChurchMemberException(SystemReturnMessage.MemberIDNotExist, $"找不到會員資料，無法進行修改作業，會員代號：{Param.MemberID}");
             }
         }
-        #region 副程式
-        /// <summary>流水號轉成16進位數，每四位數中間隔著一個減號，如1234-5678-9ABC-DEF0這樣</summary>
-        /// <param name="Serial">整數型態流水號</param>
-        /// <param name="Header">前置字串</param>
+        /// <summary>取得一筆使用者資料</summary>
+        /// <param name="LoginID">使用者帳號</param>
         /// <returns></returns>
+        public static ClsModifyMemberParam? GetMember(string LoginID)
+        {
+            return new ChurchMembersNewContext().MEMBERS.Where(x => x.LOGINID == LoginID)
+                .Select(x => new ClsModifyMemberParam
+                {
+                    MemberID = x.LOGINID,
+                    Name = x.USERNAME,
+                    Birthdate = string.IsNullOrEmpty(x.BIRTHDATE) ? null : DateTime.Parse(x.BIRTHDATE),
+                    GenderIsMale = x.GENDER == 1,
+                    PhoneNumber = x.PHONE,
+                    Email = x.EMAIL,
+                    HomeAddress = x.ADDRESS,
+                    IsBaptised = x.BAPTISED == 1,
+                    ModifiedBy = x.MODIFIER,
+                    ModifiedDate = string.IsNullOrEmpty(x.MODIFIEDDATE) ? DateTime.MinValue : default
+                }).FirstOrDefault();
+        }
+        /// <summary>取得所有會員資料</summary>
+        /// <returns></returns>
+        public static List<ClsModifyMemberParam> LoadMember()
+        {
+            return new ChurchMembersNewContext().MEMBERS.Select(x => new ClsModifyMemberParam
+            {
+                MemberID = x.LOGINID,
+                Name = x.USERNAME,
+                Birthdate = string.IsNullOrEmpty(x.BIRTHDATE) ? null : DateTime.Parse(x.BIRTHDATE),
+                GenderIsMale = x.GENDER == 1,
+                PhoneNumber = x.PHONE,
+                Email = x.EMAIL,
+                HomeAddress = x.ADDRESS,
+                IsBaptised = x.BAPTISED == 1,
+                ModifiedBy = x.MODIFIER,
+                ModifiedDate = string.IsNullOrEmpty(x.MODIFIEDDATE) ? DateTime.MinValue : default
+            }).ToList();
+        }
+        #region 副程式
+            /// <summary>流水號轉成16進位數，每四位數中間隔著一個減號，如1234-5678-9ABC-DEF0這樣</summary>
+            /// <param name="Serial">整數型態流水號</param>
+            /// <param name="Header">前置字串</param>
+            /// <returns></returns>
         private static string FormatSerial(int Serial, string Header = "")
         {
             string Hex = Serial.ToString("X");
