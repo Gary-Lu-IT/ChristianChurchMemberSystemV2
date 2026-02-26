@@ -53,7 +53,6 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
                     UserID=TxtLoginID.Text,
                     Password=TxtPassword.Text
                 });
-                MessageBox.Show("登入成功！", "登入成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult=DialogResult.OK;
                 Close();
             }

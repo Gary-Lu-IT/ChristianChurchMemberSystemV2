@@ -3,10 +3,13 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
 {
     public partial class FrmAccountView : Form
     {
-        public FrmAccountView()
+        /// <summary>目前使用者</summary>
+        public string CurrentUser { get; }
+        public FrmAccountView(string CurrentOperator)
         {
             InitializeComponent();
 
+            CurrentUser = CurrentOperator;
             LoadMemberData();
         }
         #region Subroutines
@@ -16,7 +19,7 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
             //載入會員資料
             var Members = AccountExaminer.LoadMember();
             DgvAccountView.Rows.Clear();
-            foreach(var M in Members)
+            foreach (var M in Members)
             {
                 DgvAccountView.Rows.Add(new object[]
                 {
@@ -34,5 +37,14 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
             }
         }
         #endregion
+        /// <summary>「新增」鈕事件</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            FrmAccountEditor AE = new(CurrentUser);
+            AE.ShowDialog(this);
+            LoadMemberData();
+        }
     }
 }

@@ -53,6 +53,7 @@
             BtnAdd.TabIndex = 0;
             BtnAdd.Text = "新增";
             BtnAdd.UseVisualStyleBackColor = true;
+            BtnAdd.Click += BtnAdd_Click;
             // 
             // BtnEdit
             // 

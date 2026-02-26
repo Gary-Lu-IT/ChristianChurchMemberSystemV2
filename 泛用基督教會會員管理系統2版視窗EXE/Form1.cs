@@ -68,10 +68,8 @@ namespace 泛用基督教會會員管理系統2版視窗EXE
                     return;
                 }
             }
-            FrmAccountView FAV = new FrmAccountView
-            {
-                MdiParent = this
-            };
+            FrmAccountView FAV = new FrmAccountView(CurrentLogin!.UserID);
+            FAV.MdiParent = this;
             FAV.Show();
         }
         #endregion
