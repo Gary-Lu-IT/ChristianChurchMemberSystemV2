@@ -1,5 +1,6 @@
 ﻿using 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts;
 using 泛用基督教會會員管理系統2版通用API.DataExaminers;
+using 泛用基督教會會員管理系統2版通用API.SQLiteModels.Church;
 
 namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
 {
@@ -30,7 +31,7 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
                 RdoWoman.Checked = false;
                 DtpBirthday.Value = DateTime.Now;
                 TxtPhone.Text = string.Empty;
-                TxtPhone.Text = string.Empty;
+                TxtEMail.Text = string.Empty;
                 TxtHomeAddress.Text = string.Empty;
             }
             else
@@ -38,6 +39,18 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
                 //編輯資料
                 this.Text = "編輯教友(會員)資料";
                 TxtLoginID.Enabled = false;
+                ClsModifyMemberParam mp= AccountExaminer.GetMember(TargetMemberID);
+                TxtLoginID.Text = mp.MemberID;
+                TxtName.Text = mp.Name;
+                RdoMan.Checked = mp.GenderIsMale;
+                RdoWoman.Checked = !mp.GenderIsMale;
+                if (mp.Birthdate.HasValue)
+                {
+                    DtpBirthday.Value = mp.Birthdate.Value;
+                }
+                TxtPhone.Text = mp.PhoneNumber;
+                TxtEMail.Text = mp.Email;
+                TxtHomeAddress.Text = mp.HomeAddress;
             }
         }
         /// <summary>按下確定鍵</summary>
@@ -45,7 +58,7 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
         /// <param name="e"></param>
         private void BtnConfirm_Click(object sender, EventArgs e)
         {
-            if(!TxtLoginID.Enabled)
+            if (!TxtLoginID.Enabled)
             {
                 //編輯模式
                 AccountExaminer.UpdateMember(new ClsModifyMemberParam
@@ -88,6 +101,13 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
                 MessageBox.Show("新增成功。", "新增成員資料", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
             }
+        }
+        /// <summary>「取消」鈕事件</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

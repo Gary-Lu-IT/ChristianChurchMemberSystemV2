@@ -64,6 +64,7 @@
             BtnEdit.TabIndex = 1;
             BtnEdit.Text = "修改";
             BtnEdit.UseVisualStyleBackColor = true;
+            BtnEdit.Click += ClickEdit;
             // 
             // DgvAccountView
             // 

@@ -12,7 +12,7 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
         /// <returns></returns>
         public static ClsLoginResult Login(ClsLoginParam Param)
         {
-            if(Param.UserID=="admin" && Param.Password == "admin" + DateTime.Now.ToString("yyyyMMdd"))
+            if (Param.UserID == "admin" && Param.Password == "admin" + DateTime.Now.ToString("yyyyMMdd"))
             {
                 return AccountWriter.Login(Param);
             }
@@ -30,7 +30,7 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
             {
                 throw new ChurchMemberException(SystemReturnMessage.RequiredDataIsEmpty, "必填資料未填寫：帳號");
             }
-            if(AccountWriter.GetMember(Param.MemberID) != null)
+            if (AccountWriter.GetMember(Param.MemberID) != null)
             {
                 throw new ChurchMemberException(SystemReturnMessage.MemberIDAlreadyExist, "帳號已存在，請更換其他帳號。");
             }
@@ -52,6 +52,18 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
         public static List<ClsModifyMemberParam> LoadMember()
         {
             return AccountWriter.LoadMember();
+        }
+        /// <summary>取得指定帳號的會員資料</summary>
+        /// <param name="MemberId"></param>
+        /// <returns></returns>
+        /// <exception cref="ChurchMemberException"></exception>
+        public static ClsModifyMemberParam GetMember(string MemberId)
+        {
+            if (string.IsNullOrEmpty(MemberId))
+            {
+                throw new ChurchMemberException(SystemReturnMessage.RequiredDataIsEmpty, "必填資料未填寫：帳號");
+            }
+            return AccountWriter.GetMember(MemberId)!;
         }
     }
 }

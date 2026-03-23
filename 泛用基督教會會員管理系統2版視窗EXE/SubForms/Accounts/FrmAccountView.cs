@@ -46,5 +46,21 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
             AE.ShowDialog(this);
             LoadMemberData();
         }
+
+        /// <summary>「修改」鈕事件</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickEdit(object sender, EventArgs e)
+        {
+            if (DgvAccountView.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("請選擇要編輯的教友資料！", "未選擇教友資料", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string MemberID = DgvAccountView.SelectedCells[0].OwningRow.Cells[0].Value.ToString();
+            FrmAccountEditor AE = new(CurrentUser, MemberID);
+            AE.ShowDialog(this);
+            LoadMemberData();
+        }
     }
 }
