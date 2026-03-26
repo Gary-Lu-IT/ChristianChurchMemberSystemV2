@@ -41,6 +41,7 @@
             MemberBaptised = new DataGridViewTextBoxColumn();
             Editor = new DataGridViewTextBoxColumn();
             EditorDate = new DataGridViewTextBoxColumn();
+            DeleteButton = new Button();
             ((System.ComponentModel.ISupportInitialize)DgvAccountView).BeginInit();
             SuspendLayout();
             // 
@@ -160,11 +161,23 @@
             EditorDate.ReadOnly = true;
             EditorDate.Width = 125;
             // 
+            // DeleteButton
+            // 
+            DeleteButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            DeleteButton.Location = new Point(869, 112);
+            DeleteButton.Name = "DeleteButton";
+            DeleteButton.Size = new Size(108, 44);
+            DeleteButton.TabIndex = 3;
+            DeleteButton.Text = "刪除";
+            DeleteButton.UseVisualStyleBackColor = true;
+            DeleteButton.Click += ClickDelete;
+            // 
             // FrmAccountView
             // 
             AutoScaleDimensions = new SizeF(12F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(989, 464);
+            Controls.Add(DeleteButton);
             Controls.Add(DgvAccountView);
             Controls.Add(BtnEdit);
             Controls.Add(BtnAdd);
@@ -191,5 +204,6 @@
         private DataGridViewTextBoxColumn MemberBaptised;
         private DataGridViewTextBoxColumn Editor;
         private DataGridViewTextBoxColumn EditorDate;
+        private Button DeleteButton;
     }
 }

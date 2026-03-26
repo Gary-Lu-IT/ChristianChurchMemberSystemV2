@@ -1,5 +1,5 @@
-﻿using 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts;
-using 泛用基督教會會員管理系統2版DAL.CustomClasses;
+﻿using 泛用基督教會會員管理系統2版DAL.CustomClasses;
+using 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts;
 using 泛用基督教會會員管理系統2版通用API.DataWriters;
 
 namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
@@ -64,6 +64,21 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
                 throw new ChurchMemberException(SystemReturnMessage.RequiredDataIsEmpty, "必填資料未填寫：帳號");
             }
             return AccountWriter.GetMember(MemberId)!;
+        }
+        /// <summary>刪除一筆使用者資料</summary>
+        /// <param name="LoginID">使用者帳號</param>
+        /// <exception cref="ChurchMemberException">找不到欲刪除的使用者資訊</exception>
+        public static void DeleteMember(string? LoginID)
+        {
+            if (string.IsNullOrEmpty(LoginID))
+            {
+                throw new ChurchMemberException(SystemReturnMessage.RequiredDataIsEmpty, "必填資料未填寫：帳號");
+            }
+            if(AccountWriter.GetMember(LoginID) == null)
+            {
+                throw new ChurchMemberException(SystemReturnMessage.MemberIDNotExist, "找不到會員資料，無法進行刪除作業，會員代號：" + LoginID);
+            }
+            AccountWriter.DeleteMember(LoginID);
         }
     }
 }

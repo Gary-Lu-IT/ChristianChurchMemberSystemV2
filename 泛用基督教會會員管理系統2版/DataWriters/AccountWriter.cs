@@ -119,6 +119,23 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
                     ModifiedDate = string.IsNullOrEmpty(x.MODIFIEDDATE) ? DateTime.MinValue : default
                 }).FirstOrDefault();
         }
+        /// <summary>刪除一筆使用者資料</summary>
+        /// <param name="LoginID">使用者帳號</param>
+        /// <exception cref="ChurchMemberException">找不到欲刪除的使用者資訊</exception>
+        public static void DeleteMember(string LoginID)
+        {
+            ChurchMembersNewContext db = new();
+            MEMBERS? M = db.MEMBERS.Where(x => x.LOGINID == LoginID).FirstOrDefault();
+            if (M != null)
+            {
+                db.MEMBERS.Remove(M);
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new ChurchMemberException(SystemReturnMessage.MemberIDNotExist, $"找不到會員資料，無法進行刪除作業，會員代號：{LoginID}");
+            }
+        }
         /// <summary>取得所有會員資料</summary>
         /// <returns></returns>
         public static List<ClsModifyMemberParam> LoadMember()

@@ -62,5 +62,30 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
             AE.ShowDialog(this);
             LoadMemberData();
         }
+        /// <summary>「刪除」鈕事件</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickDelete(object sender, EventArgs e)
+        {
+            if (DgvAccountView.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("請選擇要刪除的教友資料！", "未選擇教友資料", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string? MemberID = DgvAccountView.SelectedCells[0].OwningRow.Cells[0].Value.ToString();
+            if(MessageBox.Show("確定要刪除帳號："+MemberID+"的資料嗎？", "刪除確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    AccountExaminer.DeleteMember(MemberID);
+                    MessageBox.Show("刪除成功。", "刪除教友資料", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadMemberData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("刪除失敗，錯誤訊息：" + ex.Message, "刪除教友資料", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }
