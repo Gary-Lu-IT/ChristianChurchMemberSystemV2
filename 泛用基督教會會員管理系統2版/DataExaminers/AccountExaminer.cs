@@ -1,6 +1,7 @@
 ﻿using 泛用基督教會會員管理系統2版DAL.CustomClasses;
 using 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts;
 using 泛用基督教會會員管理系統2版通用API.DataWriters;
+using 泛用基督教會會員管理系統2版通用API.SQLiteModels.Church;
 
 namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
 {
@@ -12,12 +13,25 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
         /// <returns></returns>
         public static ClsLoginResult Login(ClsLoginParam Param)
         {
-            if (Param.UserID == "admin" && Param.Password == "admin" + DateTime.Now.ToString("yyyyMMdd"))
+            if(Param.UserID == "admin")
             {
-                return AccountWriter.Login(Param);
+                if(Param.Password == "admin" + DateTime.Now.ToString("yyyyMMdd"))
+                {
+                    return AccountWriter.Login(Param);
+                }
+                else
+                {
+                    throw new ChurchMemberException(SystemReturnMessage.WrongIDOrPassword);
+                }
             }
             else
             {
+                var db = new ChurchMembersNewContext();
+                MEMBERPASSWORDS? MP=db.MEMBERPASSWORDS.Where(x=>x.LOGINID == Param.UserID).FirstOrDefault();
+                if (MP == null)
+                {
+                    throw new ChurchMemberException(SystemReturnMessage.PasswordNotSet, "此帳號尚未設定密碼。");
+                }
                 throw new Exception("此部分功能仍在開發中，敬請期待。");
             }
         }

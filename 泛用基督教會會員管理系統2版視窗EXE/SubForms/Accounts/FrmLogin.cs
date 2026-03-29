@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using 泛用基督教會會員管理系統2版DAL.CustomClasses;
 using 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts;
 using 泛用基督教會會員管理系統2版通用API.DataExaminers;
 
@@ -49,6 +50,34 @@ namespace 泛用基督教會會員管理系統2版視窗EXE.SubForms.Accounts
                 });
                 DialogResult=DialogResult.OK;
                 Close();
+            }
+            catch(ChurchMemberException cex)
+            {
+                switch (cex.ErrorCode)
+                {
+                    case SystemReturnMessage.PasswordNotSet:
+                        if(MessageBox.Show("此帳號尚未設定密碼,要現在進行設定嗎？", "登入失敗", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            MessageBox.Show("密碼設定視窗施工中，還請稍候...", "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            //using (var frm = new FrmSetPassword(TxtLoginID.Text))
+                            //{
+                            //    if (frm.ShowDialog() == DialogResult.OK)
+                            //    {
+                            //        MessageBox.Show("密碼設定成功，請重新登入！", "密碼設定成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //        TxtPassword.Clear();
+                            //        TxtPassword.Focus();
+                            //    }
+                            //}
+                        }
+                        else
+                        {
+                            MessageBox.Show("使用者放棄設定密碼。", "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        break;
+                    default:
+                        MessageBox.Show("登入失敗，錯誤訊息如下：" + Environment.NewLine + cex.Message, "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
             }
             catch (Exception ex)
             {

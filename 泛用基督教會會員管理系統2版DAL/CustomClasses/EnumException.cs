@@ -24,6 +24,8 @@ namespace 泛用基督教會會員管理系統2版DAL.CustomClasses
         [DataType("帳號與密碼有錯誤")] WrongIDOrPassword = 101,
         /// <summary>帳號與密碼不可空白</summary>
         [DataType("帳號與密碼不可空白")] EmptyIDOrPassword = 102,
+        /// <summary>密碼未設定</summary>
+        [DataType("密碼未設定")]PasswordNotSet = 103,
         /// <summary>必填資料未填寫</summary>
         [DataType("必填資料未填寫")] RequiredDataIsEmpty = 100,
         /// <summary>教友ID不存在</summary>
