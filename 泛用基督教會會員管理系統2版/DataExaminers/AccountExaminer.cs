@@ -8,6 +8,26 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
     /// <summary>帳號相關資料檢核區</summary>
     public class AccountExaminer
     {
+        #region 登入登出、密碼
+        /// <summary>檢查密碼</summary>
+        /// <param name="UserID"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
+        /// <exception cref="ChurchMemberException"></exception>
+        public static MEMBERPASSWORDS? CheckPassword(string UserID, string Password)
+        {
+            var db = new ChurchMembersNewContext();
+            var MP = db.MEMBERPASSWORDS.Where(x => x.LOGINID == UserID).FirstOrDefault();
+            if (MP == null)
+            {
+                throw new ChurchMemberException(SystemReturnMessage.PasswordNotSet, "此帳號尚未設定密碼。");
+            }
+            if (MP.LOGINPWD != Password)
+            {
+                throw new ChurchMemberException(SystemReturnMessage.WrongIDOrPassword);
+            }
+            return MP;
+        }
         /// <summary>登入作業</summary>
         /// <param name="Param"></param>
         /// <returns></returns>
@@ -27,7 +47,7 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
             else
             {
                 var db = new ChurchMembersNewContext();
-                MEMBERPASSWORDS? MP=db.MEMBERPASSWORDS.Where(x=>x.LOGINID == Param.UserID).FirstOrDefault();
+                MEMBERPASSWORDS? MP = AccountExaminer.CheckPassword(Param.UserID, Param.Password);
                 if (MP == null)
                 {
                     throw new ChurchMemberException(SystemReturnMessage.PasswordNotSet, "此帳號尚未設定密碼。");
@@ -35,6 +55,18 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
                 throw new Exception("此部分功能仍在開發中，敬請期待。");
             }
         }
+        /// <summary>設定密碼</summary>
+        /// <param name="Param"></param>
+        public static void SetPassword(ClsSetPasswordParam Param)
+        {
+            if (Param.UserID == "admin") {
+                throw new ArgumentException("admin帳號的密碼由系統自動管理，無法由使用者自行設定。");
+            }
+            AccountWriter.SetPassword(Param);
+        }
+        #endregion
+
+        #region MEMBERS(教友(使用者)基本資料表)
         /// <summary>建立使用者</summary>
         /// <param name="Param"></param>
         /// <exception cref="NotImplementedException"></exception>
@@ -94,5 +126,6 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
             }
             AccountWriter.DeleteMember(LoginID);
         }
+        #endregion
     }
 }

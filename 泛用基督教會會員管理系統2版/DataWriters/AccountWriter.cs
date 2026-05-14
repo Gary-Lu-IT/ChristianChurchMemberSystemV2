@@ -7,6 +7,7 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
     /// <summary>帳號相關資料寫入器</summary>
     internal class AccountWriter
     {
+        #region 登入登出、密碼
         /// <summary>登入作業</summary>
         /// <param name="Param"></param>
         /// <returns></returns>
@@ -51,6 +52,32 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
                 throw new NotImplementedException("此部分功能仍在開發中，敬請期待。");
             }
         }
+        /// <summary>設定密碼</summary>
+        /// <param name="Param"></param>
+        public static void SetPassword(ClsSetPasswordParam Param)
+        {
+            var db = new ChurchMembersNewContext();
+            MEMBERPASSWORDS? MP=db.MEMBERPASSWORDS.Where(x=>x.LOGINID== Param.UserID).FirstOrDefault();
+            if (MP == null)
+            {
+                db.MEMBERPASSWORDS.Add(new MEMBERPASSWORDS
+                {
+                    LOGINID = Param.UserID,
+                    LOGINPWD = Param.EncodedPassword,
+                    CREATEDATE= DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    LASTMODIFYDATE= DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                });
+            }
+            else
+            {
+                MP.LOGINPWD = Param.EncodedPassword;
+                MP.LASTMODIFYDATE = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            db.SaveChanges();
+        }
+        #endregion
+
+        #region MEMBERS(教友(使用者)基本資料表)
         /// <summary>建立使用者</summary>
         /// <param name="Param"></param>
         /// <exception cref="NotImplementedException"></exception>
@@ -154,11 +181,13 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
                 ModifiedDate = string.IsNullOrEmpty(x.MODIFIEDDATE) ? DateTime.MinValue : default
             }).ToList();
         }
+        #endregion
+
         #region 副程式
-            /// <summary>流水號轉成16進位數，每四位數中間隔著一個減號，如1234-5678-9ABC-DEF0這樣</summary>
-            /// <param name="Serial">整數型態流水號</param>
-            /// <param name="Header">前置字串</param>
-            /// <returns></returns>
+        /// <summary>流水號轉成16進位數，每四位數中間隔著一個減號，如1234-5678-9ABC-DEF0這樣</summary>
+        /// <param name="Serial">整數型態流水號</param>
+        /// <param name="Header">前置字串</param>
+        /// <returns></returns>
         private static string FormatSerial(int Serial, string Header = "")
         {
             string Hex = Serial.ToString("X");
