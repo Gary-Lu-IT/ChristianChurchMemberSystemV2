@@ -15,6 +15,8 @@ public partial class ChurchMembersNewContext : DbContext
     {
     }
 
+    public virtual DbSet<LOGINFAILRECORD> LOGINFAILRECORD { get; set; }
+
     public virtual DbSet<LOGINRECORD> LOGINRECORD { get; set; }
 
     public virtual DbSet<MEMBERPASSWORDS> MEMBERPASSWORDS { get; set; }
@@ -28,6 +30,13 @@ public partial class ChurchMembersNewContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<LOGINFAILRECORD>(entity =>
+        {
+            entity.HasKey(e => new { e.LOGINID, e.FAILTIME });
+
+            entity.HasIndex(e => e.FAILID, "IX_LOGINFAILRECORD_FAILID").IsUnique();
+        });
+
         modelBuilder.Entity<LOGINRECORD>(entity =>
         {
             entity.HasKey(e => new { e.LOGINID, e.LOGINTIME });
