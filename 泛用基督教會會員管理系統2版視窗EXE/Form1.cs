@@ -11,6 +11,8 @@ namespace 泛用基督教會會員管理系統2版視窗EXE
         {
             InitializeComponent();
 
+            tmrCurrentTime.Start();
+
             SwitchLoginOutState();
         }
         #region 登入登出
@@ -24,6 +26,7 @@ namespace 泛用基督教會會員管理系統2版視窗EXE
             {
                 CurrentLogin = FL.LoginResult;
                 SwitchLoginOutState();
+                TsslCurrentUser.Text = $"{CurrentLogin.UserName}（{CurrentLogin.UserID}），歡迎光臨！";
                 MessageBox.Show($"歡迎，{CurrentLogin.UserName}！", "登入成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -38,6 +41,13 @@ namespace 泛用基督教會會員管理系統2版視窗EXE
                 {
                     CurrentLogin = null;
                     SwitchLoginOutState();
+                    // 關閉所有子視窗
+                    foreach (Form f in MdiChildren)
+                    {
+                        f.Close();
+                        f.Dispose();
+                    }
+                    TsslCurrentUser.Text = "目前使用者：無";
                     MessageBox.Show("已成功登出。", "登出成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -60,9 +70,9 @@ namespace 泛用基督教會會員管理系統2版視窗EXE
         /// <param name="e"></param>
         private void TsmiMemberManager_Click(object sender, EventArgs e)
         {
-            foreach(Form f in MdiChildren)
+            foreach (Form f in MdiChildren)
             {
-                if(f is FrmAccountView)
+                if (f is FrmAccountView)
                 {
                     f.Activate();
                     return;
@@ -73,5 +83,13 @@ namespace 泛用基督教會會員管理系統2版視窗EXE
             FAV.Show();
         }
         #endregion
+
+        /// <summary>目前時間</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tmrCurrentTime_Tick(object sender, EventArgs e)
+        {
+            TsslTime.Text= "現在是西元" + DateTime.Now.ToString("yyyy年MM月dd日 HH:mm:ss");
+        }
     }
 }

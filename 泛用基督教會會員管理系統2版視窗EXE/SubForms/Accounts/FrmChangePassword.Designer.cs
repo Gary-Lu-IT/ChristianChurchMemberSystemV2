@@ -63,6 +63,7 @@
             TxtOldPassword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TxtOldPassword.Location = new Point(149, 116);
             TxtOldPassword.Name = "TxtOldPassword";
+            TxtOldPassword.PasswordChar = '*';
             TxtOldPassword.Size = new Size(439, 38);
             TxtOldPassword.TabIndex = 2;
             // 
@@ -80,6 +81,7 @@
             TxtConfirmNewPassword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TxtConfirmNewPassword.Location = new Point(149, 215);
             TxtConfirmNewPassword.Name = "TxtConfirmNewPassword";
+            TxtConfirmNewPassword.PasswordChar = '*';
             TxtConfirmNewPassword.Size = new Size(439, 38);
             TxtConfirmNewPassword.TabIndex = 5;
             // 
@@ -88,6 +90,7 @@
             TxtNewPassword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TxtNewPassword.Location = new Point(149, 164);
             TxtNewPassword.Name = "TxtNewPassword";
+            TxtNewPassword.PasswordChar = '*';
             TxtNewPassword.Size = new Size(439, 38);
             TxtNewPassword.TabIndex = 4;
             // 
