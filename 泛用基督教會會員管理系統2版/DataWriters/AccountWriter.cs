@@ -1,4 +1,5 @@
-﻿using 泛用基督教會會員管理系統2版DAL.CustomClasses;
+﻿using System.Linq;
+using 泛用基督教會會員管理系統2版DAL.CustomClasses;
 using 泛用基督教會會員管理系統2版DAL.CustomClasses.Accounts;
 using 泛用基督教會會員管理系統2版通用API.SQLiteModels.Church;
 
@@ -49,7 +50,49 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
             }
             else
             {
-                throw new NotImplementedException("此部分功能仍在開發中，敬請期待。");
+                ClsSetPasswordParam spp = new ClsSetPasswordParam
+                {
+                    UserID = Param.UserID,
+                    Password = Param.Password
+                };
+                var mpn = (from MEMBERPASSWORDS MP in db.MEMBERPASSWORDS.Where(x => x.LOGINID == Param.UserID && x.LOGINPWD == spp.EncodedPassword)
+                         join MEMBERS M in db.MEMBERS.Where(x => x.LOGINID == Param.UserID)
+                         on MP.LOGINID equals M.LOGINID
+                           select new
+                           {
+                               MP.LOGINID,
+                               MP.LOGINPWD,
+                               M.USERNAME
+                           }).FirstOrDefault();
+                if (mpn == null)
+                {
+                    return new ClsLoginResult
+                    {
+                        UserID = string.Empty,
+                        UserName = string.Empty,
+                        UserRole = string.Empty,
+                        IsSuccess = false,
+                        ErrorMessage = "登入失敗，帳號或密碼錯誤"
+                    };
+                }
+                else
+                {
+                    db.LOGINRECORD.Add(new LOGINRECORD
+                    {
+                        SERIAL = FormatSerial(NewSerial),
+                        LOGINID = Param.UserID,
+                        LOGINTIME = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                    });
+                    db.SaveChanges();
+                    return new ClsLoginResult
+                    {
+                        UserID = Param.UserID,
+                        UserName = mpn.USERNAME,
+                        UserRole = string.Empty,
+                        IsSuccess = false,
+                        ErrorMessage = "登入失敗，帳號或密碼錯誤"
+                    };
+                }
             }
         }
         /// <summary>設定密碼</summary>
@@ -75,6 +118,36 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
             }
             db.SaveChanges();
         }
+
+        #region 登入密碼錯誤紀錄查詢
+        /// <summary>登入密碼錯誤紀錄查詢</summary>
+        /// <param name="db">資料庫連線</param>
+        /// <param name="LoginID">登入錯誤</param>
+        /// <param name="FromTime">開始時間</param>
+        /// <param name="ToTime">結束時間</param>
+        /// <returns></returns>
+        public static List<DateTime> GetLoginFailRecord(ref ChurchMembersNewContext db,string LoginID, DateTime FromTime, DateTime ToTime)
+        {
+            List<DateTime> StrTime = (from LFR in db.LOGINFAILRECORD
+                                      where LFR.LOGINID == LoginID && string.Compare(LFR.FAILTIME, FromTime.ToString("yyyy/MM/dd HH:mm:ss")) >= 0 && string.Compare(LFR.FAILTIME, ToTime.ToString("yyyy/MM/dd HH:mm:ss")) <= 0
+                                      select DateTime.Parse(LFR.FAILTIME)).ToList();
+            return StrTime;
+        }
+        /// <summary>登入密碼錯誤紀錄查詢</summary>
+        /// <param name="LoginID">登入錯誤</param>
+        /// <param name="FromTime">開始時間</param>
+        /// <param name="ToTime">結束時間</param>
+        /// <returns></returns>
+        public static List<DateTime> GetLoginFailRecord(string LoginID,DateTime FromTime,DateTime ToTime)
+        {
+            var db = new ChurchMembersNewContext();
+            List<DateTime> StrTime=(from LFR in db.LOGINFAILRECORD
+                                  where LFR.LOGINID==LoginID && string.Compare( LFR.FAILTIME,FromTime.ToString("yyyy/MM/dd HH:mm:ss"))>=0 && string.Compare(LFR.FAILTIME, ToTime.ToString("yyyy/MM/dd HH:mm:ss")) <= 0
+                                  select DateTime.Parse(LFR.FAILTIME) ).ToList();
+            return StrTime;
+        }
+        #endregion
+
         #endregion
 
         #region MEMBERS(教友(使用者)基本資料表)

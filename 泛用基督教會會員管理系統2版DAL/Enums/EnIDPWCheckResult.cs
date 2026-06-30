@@ -10,6 +10,8 @@
         /// <summary>ID不存在</summary>
         IDNotFound = -2,
         /// <summary>密碼錯誤</summary>
-        PasswordWrong = -3
+        PasswordWrong = -3,
+        /// <summary>短時間內密碼錯誤次數過多</summary>
+        FailedTooManyTimesShortly=-4
     }
 }

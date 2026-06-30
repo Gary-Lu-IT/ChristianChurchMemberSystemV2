@@ -43,60 +43,60 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(70, 68);
+            label1.Location = new Point(82, 68);
             label1.Name = "label1";
-            label1.Size = new Size(52, 25);
+            label1.Size = new Size(61, 30);
             label1.TabIndex = 0;
             label1.Text = "帳號";
             // 
             // TxtID
             // 
             TxtID.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TxtID.Location = new Point(128, 65);
+            TxtID.Location = new Point(149, 65);
             TxtID.Name = "TxtID";
             TxtID.ReadOnly = true;
-            TxtID.Size = new Size(460, 33);
+            TxtID.Size = new Size(439, 38);
             TxtID.TabIndex = 1;
             // 
             // TxtOldPassword
             // 
             TxtOldPassword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TxtOldPassword.Location = new Point(128, 116);
+            TxtOldPassword.Location = new Point(149, 116);
             TxtOldPassword.Name = "TxtOldPassword";
-            TxtOldPassword.Size = new Size(460, 33);
+            TxtOldPassword.Size = new Size(439, 38);
             TxtOldPassword.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(53, 119);
+            label2.Location = new Point(58, 119);
             label2.Name = "label2";
-            label2.Size = new Size(72, 25);
+            label2.Size = new Size(85, 30);
             label2.TabIndex = 3;
             label2.Text = "舊密碼";
             // 
             // TxtConfirmNewPassword
             // 
             TxtConfirmNewPassword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TxtConfirmNewPassword.Location = new Point(128, 215);
+            TxtConfirmNewPassword.Location = new Point(149, 215);
             TxtConfirmNewPassword.Name = "TxtConfirmNewPassword";
-            TxtConfirmNewPassword.Size = new Size(460, 33);
+            TxtConfirmNewPassword.Size = new Size(439, 38);
             TxtConfirmNewPassword.TabIndex = 5;
             // 
             // TxtNewPassword
             // 
             TxtNewPassword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TxtNewPassword.Location = new Point(128, 164);
+            TxtNewPassword.Location = new Point(149, 164);
             TxtNewPassword.Name = "TxtNewPassword";
-            TxtNewPassword.Size = new Size(460, 33);
+            TxtNewPassword.Size = new Size(439, 38);
             TxtNewPassword.TabIndex = 4;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(50, 167);
+            label3.Location = new Point(58, 172);
             label3.Name = "label3";
-            label3.Size = new Size(72, 25);
+            label3.Size = new Size(85, 30);
             label3.TabIndex = 6;
             label3.Text = "新密碼";
             // 
@@ -105,7 +105,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(10, 218);
             label4.Name = "label4";
-            label4.Size = new Size(112, 25);
+            label4.Size = new Size(133, 30);
             label4.TabIndex = 7;
             label4.Text = "確認新密碼";
             // 
@@ -118,6 +118,7 @@
             BtnCancel.TabIndex = 9;
             BtnCancel.Text = "取消";
             BtnCancel.UseVisualStyleBackColor = true;
+            BtnCancel.Click += BtnCancel_Click;
             // 
             // BtnConfirm
             // 
@@ -128,10 +129,11 @@
             BtnConfirm.TabIndex = 8;
             BtnConfirm.Text = "確認";
             BtnConfirm.UseVisualStyleBackColor = true;
+            BtnConfirm.Click += BtnConfirm_Click;
             // 
             // FrmChangePassword
             // 
-            AutoScaleDimensions = new SizeF(12F, 25F);
+            AutoScaleDimensions = new SizeF(14F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(600, 373);
             Controls.Add(BtnCancel);

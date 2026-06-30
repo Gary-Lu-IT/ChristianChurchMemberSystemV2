@@ -26,13 +26,18 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
                 CheckResult = null;
                 return EnIDPWCheckResult.IDNotFound;
             }
+            ClsSetPasswordParam clsSetPasswordParam = new()
+            {
+                UserID = UserID,
+                Password = Password
+            };
             var MP = db.MEMBERPASSWORDS.Where(x => x.LOGINID == UserID).FirstOrDefault();
             CheckResult = MP;
             if (MP == null)
             {
                 return EnIDPWCheckResult.PasswordNotSet;
             }
-            if (MP.LOGINPWD != Password)
+            if (MP.LOGINPWD != clsSetPasswordParam.EncodedPassword)
             {
                 return EnIDPWCheckResult.PasswordWrong;
             }
@@ -75,6 +80,11 @@ namespace 泛用基督教會會員管理系統2版通用API.DataExaminers
                             FAILTIME = DateTime.Now.ToString(DateTimeFormat)
                         });
                         db.SaveChanges();
+                        // 取得最近30分鐘內的登入失敗紀錄，如果超過3次，則暫停此帳號登入。
+                        if (AccountWriter.GetLoginFailRecord(Param.UserID,DateTime.Now.AddMinutes(-30),DateTime.Now).Count >= 3)
+                        {
+                            throw new ChurchMemberException(SystemReturnMessage.PasswordErrorTooManyTimes, "密碼輸入錯誤次數過多");
+                        }
                         throw new ChurchMemberException(SystemReturnMessage.WrongIDOrPassword, "帳號或密碼錯誤，請重新輸入。");
                     case EnIDPWCheckResult.IDNotFound:
                         throw new ChurchMemberException(SystemReturnMessage.WrongIDOrPassword, "帳號或密碼錯誤，請重新輸入。");

@@ -32,6 +32,8 @@ namespace 泛用基督教會會員管理系統2版DAL.CustomClasses
         [DataType("教友ID不存在")] MemberIDNotExist = 121,
         /// <summary>帳號已存在</summary>
         [DataType("帳號已存在")] MemberIDAlreadyExist = 122,
+        /// <summary>密碼錯誤次數30分鐘內達到3次</summary>
+        [DataType("密碼錯誤次數30分鐘內達到3次")]PasswordErrorTooManyTimes=123,
         /// <summary>系統不明錯誤</summary>
         [DataType("系統不明錯誤")] SystemError = 10001
     }
