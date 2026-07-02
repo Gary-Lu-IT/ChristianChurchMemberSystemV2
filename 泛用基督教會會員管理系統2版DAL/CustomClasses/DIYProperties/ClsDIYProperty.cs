@@ -9,5 +9,7 @@
         public string PropertyValue { get; set; } = null!;
         /// <summary>屬性名稱</summary>
         public string PropertyName { get; set; } = null!;
+        /// <summary>是否具有系統管理員權限(屬性群組='Role'(角色)才適用)</summary>
+        public bool AdminPrivilege { get; set; } = false;
     }
 }

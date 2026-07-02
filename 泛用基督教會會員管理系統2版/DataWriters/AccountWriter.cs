@@ -269,18 +269,6 @@ namespace 泛用基督教會會員管理系統2版通用API.DataWriters
             Hex = Header + Hex;
             return Hex;
         }
-        /// <summary>SHA512加密</summary>
-        /// <param name="OriginPassword"></param>
-        /// <returns></returns>
-        private static string SHA512Encode(string OriginPassword)
-        {
-            using (var sha512 = System.Security.Cryptography.SHA512.Create())
-            {
-                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(OriginPassword);
-                byte[] hash = sha512.ComputeHash(bytes);
-                return Convert.ToBase64String(hash);
-            }
-        }
         #endregion
     }
 }

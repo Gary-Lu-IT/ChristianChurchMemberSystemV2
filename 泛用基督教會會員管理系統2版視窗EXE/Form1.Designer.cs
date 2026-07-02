@@ -34,10 +34,12 @@
             TsmiLogout = new ToolStripMenuItem();
             TsmDataManagement = new ToolStripMenuItem();
             TsmiMemberManager = new ToolStripMenuItem();
+            TsmSystemSetting = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             TsslTime = new ToolStripStatusLabel();
             TsslCurrentUser = new ToolStripStatusLabel();
             tmrCurrentTime = new System.Windows.Forms.Timer(components);
+            TsmPropertySetting = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -45,25 +47,25 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { TsmiLogin, TsmiLogout, TsmDataManagement });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { TsmiLogin, TsmiLogout, TsmDataManagement, TsmSystemSetting });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 2, 0, 2);
-            menuStrip1.Size = new Size(978, 31);
+            menuStrip1.Size = new Size(978, 32);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
             // TsmiLogin
             // 
             TsmiLogin.Name = "TsmiLogin";
-            TsmiLogin.Size = new Size(79, 27);
+            TsmiLogin.Size = new Size(79, 28);
             TsmiLogin.Text = "登入(&I)";
             TsmiLogin.Click += ClickTsmiLogin;
             // 
             // TsmiLogout
             // 
             TsmiLogout.Name = "TsmiLogout";
-            TsmiLogout.Size = new Size(89, 27);
+            TsmiLogout.Size = new Size(89, 28);
             TsmiLogout.Text = "登出(&O)";
             TsmiLogout.Click += ClickTsmiLogout;
             // 
@@ -71,7 +73,7 @@
             // 
             TsmDataManagement.DropDownItems.AddRange(new ToolStripItem[] { TsmiMemberManager });
             TsmDataManagement.Name = "TsmDataManagement";
-            TsmDataManagement.Size = new Size(145, 27);
+            TsmDataManagement.Size = new Size(145, 28);
             TsmDataManagement.Text = "主資料管理(&M)";
             // 
             // TsmiMemberManager
@@ -80,6 +82,13 @@
             TsmiMemberManager.Size = new Size(242, 34);
             TsmiMemberManager.Text = "會員資料管理(&A)";
             TsmiMemberManager.Click += TsmiMemberManager_Click;
+            // 
+            // TsmSystemSetting
+            // 
+            TsmSystemSetting.DropDownItems.AddRange(new ToolStripItem[] { TsmPropertySetting });
+            TsmSystemSetting.Name = "TsmSystemSetting";
+            TsmSystemSetting.Size = new Size(120, 28);
+            TsmSystemSetting.Text = "系統設定(&S)";
             // 
             // statusStrip1
             // 
@@ -107,6 +116,12 @@
             // 
             tmrCurrentTime.Tick += tmrCurrentTime_Tick;
             // 
+            // TsmPropertySetting
+            // 
+            TsmPropertySetting.Name = "TsmPropertySetting";
+            TsmPropertySetting.Size = new Size(270, 34);
+            TsmPropertySetting.Text = "各種屬性設定(&P)";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(11F, 23F);
@@ -116,7 +131,7 @@
             Controls.Add(menuStrip1);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Form1";
             Text = "泛用基督教會會員管理系統";
             menuStrip1.ResumeLayout(false);
@@ -138,5 +153,7 @@
         private ToolStripStatusLabel TsslTime;
         private ToolStripStatusLabel TsslCurrentUser;
         private System.Windows.Forms.Timer tmrCurrentTime;
+        private ToolStripMenuItem TsmSystemSetting;
+        private ToolStripMenuItem TsmPropertySetting;
     }
 }

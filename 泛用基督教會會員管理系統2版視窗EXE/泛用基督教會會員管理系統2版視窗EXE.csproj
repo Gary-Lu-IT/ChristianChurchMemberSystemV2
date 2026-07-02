@@ -9,16 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Utilities\**" />
+    <EmbeddedResource Remove="Utilities\**" />
+    <None Remove="Utilities\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Remove="SubForms\Accounts\FrmPasswordEditor.resx" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\泛用基督教會會員管理系統2版DAL\泛用基督教會會員管理系統2版DAL.csproj" />
     <ProjectReference Include="..\泛用基督教會會員管理系統2版\泛用基督教會會員管理系統2版通用API.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>

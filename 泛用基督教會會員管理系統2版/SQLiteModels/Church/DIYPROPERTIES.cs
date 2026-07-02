@@ -10,4 +10,6 @@ public partial class DIYPROPERTIES
     public string PROPID { get; set; } = null!;
 
     public string PROPNAME { get; set; } = null!;
+
+    public int ADMINPRIVILEGE { get; set; }
 }
