@@ -25,6 +25,8 @@ public partial class ChurchMembersNewContext : DbContext
 
     public virtual DbSet<MEMBERS> MEMBERS { get; set; }
 
+    public virtual DbSet<MEMBERS_ROLES> MEMBERS_ROLES { get; set; }
+
     public virtual DbSet<SERIAL_TABLE> SERIAL_TABLE { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -58,6 +60,11 @@ public partial class ChurchMembersNewContext : DbContext
         modelBuilder.Entity<MEMBERS>(entity =>
         {
             entity.HasKey(e => e.LOGINID);
+        });
+
+        modelBuilder.Entity<MEMBERS_ROLES>(entity =>
+        {
+            entity.HasKey(e => e.MEMBERID);
         });
 
         modelBuilder.Entity<SERIAL_TABLE>(entity =>
